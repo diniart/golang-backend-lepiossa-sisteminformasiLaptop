@@ -1,0 +1,841 @@
+definitions:
+  controller.LoginInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  controller.OperasiSistemInput:
+    properties:
+      namaOs:
+        type: string
+    type: object
+  controller.RegisterInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    - username
+    type: object
+  controller.brandInput:
+    properties:
+      namaBrand:
+        type: string
+    type: object
+  controller.laptopInput:
+    properties:
+      brandID:
+        type: integer
+      detail:
+        type: string
+      grafis:
+        type: string
+      hardisk:
+        type: string
+      harga:
+        type: string
+      image:
+        type: string
+      layar:
+        type: string
+      namaLaptop:
+        type: string
+      osID:
+        type: integer
+      prosesor:
+        type: string
+      ram:
+        type: string
+      ratingID:
+        type: integer
+    type: object
+  controller.ratingInput:
+    properties:
+      rating:
+        type: integer
+    type: object
+  controller.userInput:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      userName:
+        type: string
+    type: object
+  models.Brand:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      namaBrand:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  models.Laptop:
+    properties:
+      brandID:
+        type: integer
+      createdAt:
+        type: string
+      detail:
+        type: string
+      grafis:
+        type: string
+      hardisk:
+        type: string
+      harga:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      layar:
+        type: string
+      namaLaptop:
+        type: string
+      osID:
+        type: integer
+      prosesor:
+        type: string
+      ram:
+        type: string
+      ratingID:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  models.OperasiSistem:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      namaOs:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+  models.Rating:
+    properties:
+      createdAt:
+        type: string
+      id:
+        type: integer
+      rating:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  models.Users:
+    properties:
+      createdAt:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      updatedAt:
+        type: string
+      userName:
+        type: string
+    type: object
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+paths:
+  /brand:
+    get:
+      description: Get a list of Brand.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Brand'
+            type: array
+      summary: Get all Brand.
+      tags:
+      - Brand
+    post:
+      description: Creating a new Brand.
+      parameters:
+      - description: the body to create a new Brand
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.brandInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Brand'
+      security:
+      - BearerToken: []
+      summary: Create New Brand.
+      tags:
+      - Brand
+  /brand/{id}:
+    delete:
+      description: Delete a Brand by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Brand id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      security:
+      - BearerToken: []
+      summary: Delete one Brand.
+      tags:
+      - Brand
+    get:
+      description: Get an Brand by id.
+      parameters:
+      - description: Brand id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Brand'
+      summary: Get Brand.
+      tags:
+      - Brand
+    patch:
+      description: Update Brand by id.
+      parameters:
+      - description: Brand id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'the body to update brand '
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.brandInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Brand'
+      security:
+      - BearerToken: []
+      summary: Update Brand.
+      tags:
+      - Brand
+  /brand/{id}/laptop:
+    get:
+      description: Get all Laptop by BrandID.
+      parameters:
+      - description: Brand id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Laptop'
+            type: array
+      summary: Get Laptops.
+      tags:
+      - Brand
+  /laptop:
+    get:
+      description: Get a list of Laptops.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Laptop'
+            type: array
+      summary: Get all laptops.
+      tags:
+      - Laptop
+    post:
+      description: Creating a new Laptop.
+      parameters:
+      - description: the body to create a new laptop
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.laptopInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Laptop'
+      security:
+      - BearerToken: []
+      summary: Create New Laptop.
+      tags:
+      - Laptop
+  /laptop/{id}:
+    delete:
+      description: Delete a laptop by id.
+      parameters:
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: laptop id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      security:
+      - BearerToken: []
+      summary: Delete one laptop.
+      tags:
+      - Laptop
+    get:
+      description: Get a Laptop by id.
+      parameters:
+      - description: laptop id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Laptop'
+      summary: Get Laptop.
+      tags:
+      - Laptop
+    patch:
+      description: Update laptop by id.
+      parameters:
+      - description: laptop id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update an laptop
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.laptopInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Laptop'
+      security:
+      - BearerToken: []
+      summary: Update Laptop.
+      tags:
+      - Laptop
+  /login:
+    post:
+      description: Logging in to get jwt token to access admin or user api by roles.
+      parameters:
+      - description: the body to login a user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.LoginInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Login as as user.
+      tags:
+      - Auth
+  /os:
+    get:
+      description: Get a list of OperasiSistem.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.OperasiSistem'
+            type: array
+      summary: Get all OperasiSistem.
+      tags:
+      - OperasiSistem
+    post:
+      description: Creating a new OperasiSistem.
+      parameters:
+      - description: the body to create a new OperasiSistem
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.OperasiSistemInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OperasiSistem'
+      security:
+      - BearerToken: []
+      summary: Create New OperasiSistem.
+      tags:
+      - OperasiSistem
+  /os/{id}:
+    delete:
+      description: Delete a OperasiSistem by id.
+      parameters:
+      - description: OperasiSistem id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      security:
+      - BearerToken: []
+      summary: Delete one OperasiSistem.
+      tags:
+      - OperasiSistem
+    get:
+      description: Get an OperasiSistem by id.
+      parameters:
+      - description: OperasiSistem id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OperasiSistem'
+      summary: Get OperasiSistem.
+      tags:
+      - OperasiSistem
+    patch:
+      description: Update OperasiSistem by id.
+      parameters:
+      - description: OperasiSistem id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update age os category
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.OperasiSistemInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.OperasiSistem'
+      security:
+      - BearerToken: []
+      summary: Update OperasiSistem.
+      tags:
+      - OperasiSistem
+  /os/{id}/laptop:
+    get:
+      description: Get all Laptops by OperasiSistemId.
+      parameters:
+      - description: OperasiSistem id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Laptop'
+            type: array
+      summary: Get Laptops.
+      tags:
+      - OperasiSistem
+  /rating:
+    get:
+      description: Get a list of Rating.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Rating'
+            type: array
+      summary: Get all Rating.
+      tags:
+      - Rating
+    post:
+      description: Creating a new Rating.
+      parameters:
+      - description: the body to create a new Rating
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.ratingInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Rating'
+      security:
+      - BearerToken: []
+      summary: Create New Rating.
+      tags:
+      - Rating
+  /rating/{id}:
+    delete:
+      description: Delete a Rating by id.
+      parameters:
+      - description: Rating id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      security:
+      - BearerToken: []
+      summary: Delete one Rating.
+      tags:
+      - Rating
+    get:
+      description: Get an Rating by id.
+      parameters:
+      - description: Rating id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Rating'
+      summary: Get Rating.
+      tags:
+      - Rating
+    patch:
+      description: Update Rating by id.
+      parameters:
+      - description: Rating id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 'the body to update rating '
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.ratingInput'
+      - description: 'Authorization. How to input in swagger : ''Bearer <insert_your_token_here>'''
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Rating'
+      security:
+      - BearerToken: []
+      summary: Update Rating.
+      tags:
+      - Rating
+  /rating/{id}/laptop:
+    get:
+      description: Get all Laptops by RatingId.
+      parameters:
+      - description: Rating id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Laptop'
+            type: array
+      summary: Get Laptops.
+      tags:
+      - Rating
+  /register:
+    post:
+      description: registering a user from public access.
+      parameters:
+      - description: the body to register a user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.RegisterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Register a user.
+      tags:
+      - Auth
+  /user:
+    get:
+      description: Get a list of Users.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Users'
+            type: array
+      summary: Get all Users.
+      tags:
+      - Users
+    post:
+      description: Creating a new Users.
+      parameters:
+      - description: the body to create a new Users
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.userInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Users'
+      summary: Create New Users.
+      tags:
+      - Users
+  /user/{id}:
+    delete:
+      description: Delete a Users by id.
+      parameters:
+      - description: Users id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+      summary: Delete one Users.
+      tags:
+      - Users
+    get:
+      description: Get an Users by id.
+      parameters:
+      - description: Users id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Users'
+      summary: Get Users.
+      tags:
+      - Users
+    patch:
+      description: Update Users by id.
+      parameters:
+      - description: Users id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: the body to update age user category
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/controller.userInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Users'
+      summary: Update Users.
+      tags:
+      - Users
+swagger: "2.0"
